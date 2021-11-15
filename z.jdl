@@ -1,0 +1,53 @@
+entity Product {
+    countryOfOrigin String required maxlength(50)
+    available Boolean required 
+    pictureUrls String required maxlength(255)
+    name String required maxlength(50)
+    vendor String maxlength(50)
+    vendorCode String maxlength(50)
+    properties AnyBlob required
+    price BigDecimal required
+    totalRating Double required
+    description String maxlength(256)
+}
+
+entity Category {
+        xmlCategoryId Integer
+	parentId Integer
+	name String required
+}
+
+entity Review {
+	userId Integer required
+	body String minlength(5) maxlength(256) required
+    dateAdded Instant required
+    rating Double required
+}
+
+entity Order {
+	name String
+    userId String
+    dateAdded LocalDate
+}
+
+
+relationship OneToMany {
+	Product to Review
+}
+
+relationship OneToMany {
+	Order to Product
+}
+
+// Set pagination options
+paginate Product, Review with infinite-scroll
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl 
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
+
