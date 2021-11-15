@@ -1,0 +1,29 @@
+{
+  "name": "Category",
+  "fields": [
+    {
+      "fieldName": "xmlCategoryId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "parentId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "category",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211115174542"
+}

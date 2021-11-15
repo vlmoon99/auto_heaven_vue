@@ -1,0 +1,80 @@
+<template>
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <form name="editForm" role="form" novalidate v-on:submit.prevent="save()">
+        <h2
+          id="autoheavenApp.category.home.createOrEditLabel"
+          data-cy="CategoryCreateUpdateHeading"
+          v-text="$t('autoheavenApp.category.home.createOrEditLabel')"
+        >
+          Create or edit a Category
+        </h2>
+        <div>
+          <div class="form-group" v-if="category.id">
+            <label for="id" v-text="$t('global.field.id')">ID</label>
+            <input type="text" class="form-control" id="id" name="id" v-model="category.id" readonly />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="$t('autoheavenApp.category.xmlCategoryId')" for="category-xmlCategoryId"
+              >Xml Category Id</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="xmlCategoryId"
+              id="category-xmlCategoryId"
+              data-cy="xmlCategoryId"
+              :class="{ valid: !$v.category.xmlCategoryId.$invalid, invalid: $v.category.xmlCategoryId.$invalid }"
+              v-model.number="$v.category.xmlCategoryId.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="$t('autoheavenApp.category.parentId')" for="category-parentId">Parent Id</label>
+            <input
+              type="number"
+              class="form-control"
+              name="parentId"
+              id="category-parentId"
+              data-cy="parentId"
+              :class="{ valid: !$v.category.parentId.$invalid, invalid: $v.category.parentId.$invalid }"
+              v-model.number="$v.category.parentId.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="$t('autoheavenApp.category.name')" for="category-name">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              id="category-name"
+              data-cy="name"
+              :class="{ valid: !$v.category.name.$invalid, invalid: $v.category.name.$invalid }"
+              v-model="$v.category.name.$model"
+              required
+            />
+            <div v-if="$v.category.name.$anyDirty && $v.category.name.$invalid">
+              <small class="form-text text-danger" v-if="!$v.category.name.required" v-text="$t('entity.validation.required')">
+                This field is required.
+              </small>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" v-on:click="previousState()">
+            <font-awesome-icon icon="ban"></font-awesome-icon>&nbsp;<span v-text="$t('entity.action.cancel')">Cancel</span>
+          </button>
+          <button
+            type="submit"
+            id="save-entity"
+            data-cy="entityCreateSaveButton"
+            :disabled="$v.category.$invalid || isSaving"
+            class="btn btn-primary"
+          >
+            <font-awesome-icon icon="save"></font-awesome-icon>&nbsp;<span v-text="$t('entity.action.save')">Save</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
+<script lang="ts" src="./category-update.component.ts"></script>
